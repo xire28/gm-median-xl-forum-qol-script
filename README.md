@@ -20,7 +20,7 @@ Add more username status colors on median XL forum (online, ingame, offline), mo
 
 ## Mobile
 - Install Greasemonkey extension (only available on firefox mobile, chrome mobile does not allows to install extensions)
-- Upload the archive on your phone (USB/share/etc.)
+- Download/Upload the archive on your phone (browser/USB/share/etc.)
 - Import the downloaded archive from the greasemonkey menu (restore backup)
 - Done
 
