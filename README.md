@@ -14,7 +14,7 @@ Add more username status colors on median XL forum (online, ingame, offline), mo
 # Installation steps
 
 ## Desktop
-- Install Greasemonkey extension (chrome, firefox)
+- Install Greasemonkey/tampermonkey extension ([chrome addon](https://tampermonkey.net/), [firefox addon](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey))
 - Import the downloaded archive from the greasemonkey menu (restore backup)
 - Done
 
