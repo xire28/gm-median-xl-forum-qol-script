@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name     Median XL - Forum QoL script
 // @description Add more username status colors on median XL forum (online, ingame, offline), more features to come...
-// @version  1.0.3
+// @version  1.0.4
 // @grant    GM.xmlHttpRequest
 // @include https://forum.median-xl.com/*
 // @require https://code.jquery.com/jquery-3.1.0.min.js
@@ -71,6 +71,7 @@
     });
   }
   
+  
   if(CACHED_ONLINE_USERS && CACHED_FORUM_USERS && CACHED_EXPIRATION && CACHED_EXPIRATION + CACHE_TIME >= CURRENT_TIMESTAMP){
     console.log(LOGS_PREFIX + CACHE_LOG_MESSAGE(CACHED_ONLINE_USERS, CACHED_FORUM_USERS, CACHE_TIME));
     var bindedApplyColors = applyColorOnUsernameLinks.bind(this, CACHED_ONLINE_USERS, CACHED_FORUM_USERS);
@@ -94,7 +95,9 @@
               var $infoHtml = $(infoResponse.responseText),
                   onlineUsers = $infoHtml.find(ONLINE_USERS_SELECTOR).text().split(ONLINE_USERS_SEPARATOR);
 
-              applyColorOnUsernameLinks(onlineUsers, forumUsers);
+              var bindedApplyColors = applyColorOnUsernameLinks.bind(this, onlineUsers, forumUsers);
+              bindedApplyColors();
+              setInterval(bindedApplyColors, REAPPLY_USERNAME_COLORS_INTERVAL);
               
               localStorage.setItem(CACHED_ONLINE_USERS_KEY, onlineUsers);
     					localStorage.setItem(CACHED_FORUM_USERS_KEY, forumUsers);
