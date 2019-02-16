@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name     Median XL - Forum QoL script
 // @description Add more username status colors on median XL forum (online, ingame, offline), more features to come...
-// @version  1.0.1
+// @version  1.0.2
 // @grant    GM.xmlHttpRequest
 // @include https://forum.median-xl.com/*
 // @require https://code.jquery.com/jquery-3.1.0.min.js
@@ -32,13 +32,18 @@
       ONLINE_USERS_SELECTOR = 'h3:contains("Players Online")+.list',
       ONLINE_USERS_SEPARATOR = ', ',
       ONLINE_USERS_COLOR = 'lightgreen',
+      
+      CACHE_ARRAY_SEPARATOR = ',',
+      
       CACHED_ONLINE_USERS_KEY = 'onlineUsers',
-      CACHED_ONLINE_USERS = localStorage.getItem(CACHED_ONLINE_USERS_KEY),
+      CACHED_ONLINE_USERS_RAW = localStorage.getItem(CACHED_ONLINE_USERS_KEY),
+      CACHED_ONLINE_USERS = CACHED_ONLINE_USERS_RAW && CACHED_ONLINE_USERS_RAW.split(CACHE_ARRAY_SEPARATOR),
       
       FORUM_USERS_SELECTOR = '.online-list .username',
       FORUM_USERS_COLOR = 'cyan',
       CACHED_FORUM_USERS_KEY = 'forumUsers',
-      CACHED_FORUM_USERS = localStorage.getItem(CACHED_FORUM_USERS_KEY),
+      CACHED_FORUM_USERS_RAW = localStorage.getItem(CACHED_FORUM_USERS_KEY),
+      CACHED_FORUM_USERS = CACHED_FORUM_USERS_RAW && CACHED_FORUM_USERS_RAW.split(CACHE_ARRAY_SEPARATOR),
       
       SECONDS = 1000,
       CACHE_TIME = 30 * SECONDS,
