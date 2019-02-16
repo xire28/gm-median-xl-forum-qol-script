@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name     Median XL - Forum QoL script
 // @description Add more username status colors on median XL forum (online, ingame, offline), more features to come...
-// @version  1.0.2
+// @version  1.0.3
 // @grant    GM.xmlHttpRequest
 // @include https://forum.median-xl.com/*
 // @require https://code.jquery.com/jquery-3.1.0.min.js
@@ -52,7 +52,7 @@
       
       NOT_FOUND = -1,
       OFFLINE_USERS_COLOR = 'gray',
-  		REAPPLY_USERNAME_COLORS_INTERVAL = 1 * SECONDS,
+  		REAPPLY_USERNAME_COLORS_INTERVAL = 0.1 * SECONDS,
       
       STATUS_LEGEND_TAG = $('<span/>').css({'text-transform': 'capitalize'}),
       STATUS_LEGEND_SEPARATOR = ', ',
