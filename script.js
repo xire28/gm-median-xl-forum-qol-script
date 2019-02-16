@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name     Median XL - Forum QoL script
 // @description Add more username status colors on median XL forum (online, ingame, offline), more features to come...
-// @version  1
+// @version  1.0.1
 // @grant    GM.xmlHttpRequest
 // @include https://forum.median-xl.com/*
 // @require https://code.jquery.com/jquery-3.1.0.min.js
@@ -11,7 +11,7 @@
   
   // Constants
   var EXTENSION_NAME = 'Greasemonkey',
-      SCRIPT_NAME = 'median_xl_forum_qol.js',
+  		SCRIPT_NAME = 'median_xl_forum_qol.js',
       
       STATUS_LEGEND_SELECTOR = 'em:contains(Legend:)',
       STATUS_LEGEND_ONLINE = "ingame users",
@@ -21,13 +21,13 @@
       LOGS_PREFIX = '[' + EXTENSION_NAME + '][' + SCRIPT_NAME + '] ',
       CACHE_LOG_MESSAGE = function(onlineUsers, forumUsers, cacheTime){ return "Loaded " + onlineUsers.length + " " + STATUS_LEGEND_ONLINE + " and " + forumUsers.length + " " + STATUS_LEGEND_FORUM + " from localstorage cache (expire each " + cacheTime + " ms)"; },
       REQUEST_LOG_MESSAGE = function(url){ return "Requesting " + url + " and caching users"; },
-      GET_METHOD = 'GET',
-      FORUM_USERS_URL = 'https://forum.median-xl.com',
+  		GET_METHOD = 'GET',
+  		FORUM_USERS_URL = 'https://forum.median-xl.com',
       ONLINE_USERS_URL = 'https://tsw.median-xl.com/info',
       CURRENT_TIMESTAMP = (new Date()).getTime(),
       CACHE_AVOIDANCE_URL_SUFFIX = "?t=" + CURRENT_TIMESTAMP,
       
-      NOT_COLORED_USERNAME_LINK_SELECTOR = 'a.username:not([color])',
+      NOT_COLORED_USERNAME_SELECTOR = '.username:not([color])',
       
       ONLINE_USERS_SELECTOR = 'h3:contains("Players Online")+.list',
       ONLINE_USERS_SEPARATOR = ', ',
@@ -47,7 +47,7 @@
       
       NOT_FOUND = -1,
       OFFLINE_USERS_COLOR = 'gray',
-      REAPPLY_USERNAME_COLORS_INTERVAL = 1 * SECONDS,
+  		REAPPLY_USERNAME_COLORS_INTERVAL = 1 * SECONDS,
       
       STATUS_LEGEND_TAG = $('<span/>').css({'text-transform': 'capitalize'}),
       STATUS_LEGEND_SEPARATOR = ', ',
@@ -56,13 +56,13 @@
       STATUS_LEGEND_OFFLINE_TAG = STATUS_LEGEND_TAG.clone().text(STATUS_LEGEMD_OFFLINE).css({color: OFFLINE_USERS_COLOR});
   
   function applyColorOnUsernameLinks(onlineUsers, forumUsers){
-    $(document.body).find(NOT_COLORED_USERNAME_LINK_SELECTOR).each(function(_, usernameLink) {
-      var $usernameLink = $(usernameLink),
-          username = $usernameLink.text(),
+    $(document.body).find(NOT_COLORED_USERNAME_SELECTOR).each(function(_, usernameTag) {
+      var $usernameTag = $(usernameTag),
+          username = $usernameTag.text(),
           isOnline = onlineUsers.indexOf(username) != NOT_FOUND,
           isOnForum = forumUsers.indexOf(username) != NOT_FOUND;
     
-      $usernameLink.css({color: isOnline ? ONLINE_USERS_COLOR : (isOnForum ? FORUM_USERS_COLOR : OFFLINE_USERS_COLOR)});
+      $usernameTag.css({color: isOnline ? ONLINE_USERS_COLOR : (isOnForum ? FORUM_USERS_COLOR : OFFLINE_USERS_COLOR)});
     });
   }
   
@@ -102,3 +102,4 @@
   $(STATUS_LEGEND_SELECTOR).append(STATUS_LEGEND_SEPARATOR).append(STATUS_LEGEND_ONLINE_TAG).append(STATUS_LEGEND_SEPARATOR).append(STATUS_LEGEND_FORUM_TAG).append(STATUS_LEGEND_SEPARATOR).append(STATUS_LEGEND_OFFLINE_TAG)
   
 })(GM, jQuery, document, localStorage, console);
+
